@@ -8,6 +8,7 @@ class ShopmeBackEndApplicationTests {
 
 	@Test
 	void contextLoads() {
+		System.out.println("Asdqwe");
 	}
 
 }
