@@ -1,5 +1,5 @@
 
-git checkout -b 31.-Check-Uniqueness-of-User-Email
+git checkout -b 32.-Using-Fontawesome-for-Icons
 git add .
-git commit -m "31.-Check-Uniqueness-of-User-Email"
-git push -u origin 31.-Check-Uniqueness-of-User-Email
+git commit -m "32.-Using-Fontawesome-for-Icons"
+git push -u origin 32.-Using-Fontawesome-for-Icons

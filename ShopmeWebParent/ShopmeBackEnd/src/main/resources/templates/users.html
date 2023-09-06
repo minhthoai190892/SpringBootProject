@@ -12,6 +12,10 @@
         integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
 
     <!-- <link rel="stylesheet" th:href="@{/webjars/jquery/dist/jquery.min.js}"> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+        integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 
 <body>
@@ -96,13 +100,19 @@
                     <tbody class="table-group-divider">
                         <tr class="table-primary" th:each=" user: ${listUsers}">
                             <td scope="row">[[${user.id}]]</td>
-                            <td>[[${user.photo}]]</td>
+                            <td><i class="fa-solid fa-image-portrait fa-2xl icon-silver"></i></td>
                             <td>[[${user.firstName}]]</td>
                             <td>[[${user.lastName}]]</td>
                             <td>[[${user.email}]]</td>
                             <td>[[${user.roles}]]</td>
-                            <td>[[${user.enabled}]]</td>
-                            <td>Edit|Delete</td>
+                            <td>
+                                <a th:if="${ user.enabled == true}" class="fa-solid fa-circle-check fa-2xl icon-green"
+                                    href=""></a>
+                                    <a th:if="${ user.enabled == false}" class="fa-solid fa-circle-check fa-2xl icon-dark"
+                                    href=""></a>
+                            </td>
+                            <td><i class="fa-regular fa-pen-to-square fa-2xl icon-green"></i>|<i
+                                    class="fa-regular fa-trash-can fa-2xl icon-dark"></i></td>
                         </tr>
                     </tbody>
                     <tfoot>
