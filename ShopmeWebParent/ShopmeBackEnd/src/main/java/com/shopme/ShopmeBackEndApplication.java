@@ -9,7 +9,9 @@ import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.Bean;
 
 import com.shopme.admin.user.RoleRepository;
+import com.shopme.admin.user.UserRepository;
 import com.shopme.common.entity.Role;
+import com.shopme.common.entity.User;
 
 @SpringBootApplication
 @EntityScan({"com.shopme.common.entity","com.shopme.admin.user"})
@@ -19,10 +21,76 @@ public class ShopmeBackEndApplication {
 		SpringApplication.run(ShopmeBackEndApplication.class, args);
 	}
 	@Bean
-	public CommandLineRunner commandLineRunner(RoleRepository repository) {
+	public CommandLineRunner commandLineRunner(RoleRepository roleRepository,UserRepository userRepository) {
 		return runner ->{
-			createRole(repository);
+//			createRole(repository);
+//			createUserWithTwoRole(repository,userRepository);
+//			listUser(userRepository);
+//			getUserById(userRepository);
+//			updateUserDetail(userRepository);
+//			updateUserRoles(userRepository,roleRepository);
+			deleteUserById(userRepository);
 		};
+	}
+	private void deleteUserById(UserRepository userRepository) {
+		// TODO Auto-generated method stub
+		System.err.println("deleteUserById");
+		userRepository.deleteById(3);
+	}
+	private void updateUserRoles(UserRepository userRepository, RoleRepository roleRepository) {
+		// TODO Auto-generated method stub
+		System.err.println("updateUserRoles");
+		User user = userRepository.findById(3).get();
+		Role roleEditor = roleRepository.findById(3).get();
+		Role salespersonRole = roleRepository.findById(2).get();
+		user.getRoles().remove(roleEditor);
+		user.addRole(salespersonRole);
+		userRepository.save(user);
+		
+	}
+	private void updateUserDetail(UserRepository userRepository) {
+		// TODO Auto-generated method stub
+		System.err.println("updateUserDetail");
+		User user = userRepository.findById(1).get();
+		user.setEnabled(true);
+		user.setEmail("namjavaprogrammer@gmail.com");
+		userRepository.save(user);
+	}
+	private void getUserById(UserRepository userRepository) {
+		// TODO Auto-generated method stub
+		System.err.println("getUserById");
+		User user = userRepository.findById(1).get();
+		System.out.println(user);
+		
+		
+	}
+	private void listUser(UserRepository userRepository) {
+		System.err.println("listUser");
+		Iterable<User> listUsers = userRepository.findAll();
+		listUsers.forEach(user->System.out.println(user));
+		// TODO Auto-generated method stub
+		
+	}
+	private void createUserWithTwoRole(RoleRepository roleRepository, UserRepository userRepository) {
+		// TODO Auto-generated method stub
+		System.err.println("createUserWithTwoRole");
+		Role editorRole = roleRepository.findById(3).get();
+		Role assistantRole = roleRepository.findById(5).get();
+		User user = new User("ravi@gmail.com", "ravi2020", "Ravi", "Kumar");
+		user.addRole(editorRole);
+		user.addRole(assistantRole);
+		userRepository.save(user);
+	}
+	private void createUser(RoleRepository roleRepository,UserRepository userRepository) {
+		
+		// TODO Auto-generated method stub
+		System.err.println("createUser");
+		Role editorRole = roleRepository.findById(3).get();
+		Role assistantRole = roleRepository.findById(5).get();
+		User user = new User("ravi@gmail.com", "ravi2020", "Ravi", "Kumar");
+		user.addRole(editorRole);
+		user.addRole(assistantRole);
+		userRepository.save(user);
 	}
 	private void createRole(RoleRepository repository) {
 		// TODO Auto-generated method stub
