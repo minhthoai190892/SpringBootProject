@@ -69,10 +69,11 @@
             </nav>
         </div>
         <div>
-            <h1>User Manager | Create User </h1>
+            <h1>User Manager | [[${pageTitle}]] </h1>
         </div>
         <form th:action="@{/users/save}" th:object="${user}" method="post" style="max-width: 700px;margin: 0 auto;"
             onsubmit="return checkEmailUnique(this)">
+            <input type="hidden" name="" th:field="*{id}">
             <div class="border border-secondary rounded p-3">
                 <div class="form-group row">
                     <label for="" class="col-sm-4 col-form-label">E-mail:</label>
@@ -98,8 +99,10 @@
                 <div class="form-group row mt-2">
                     <label for="" class="col-sm-4 col-form-label">Password:</label>
                     <div class="col-sm-8">
-                        <input type="password" class="form-control" th:field="*{password}" required minlength="8"
-                            maxlength="20">
+                        <input th:if="${user.id == null}" type="password" class="form-control" th:field="*{password}"
+                            required minlength="8" maxlength="20">
+                        <input th:if="${user.id != null}" type="password" class="form-control" th:field="*{password}"
+                            minlength="8" maxlength="20">
                     </div>
                 </div>
                 <div class="form-group row mt-2">
@@ -164,8 +167,9 @@
             url = "[[@{/users/check_email}]]";
             userEmail = $("#email").val();
             csrf = $("input[name='_csrf']").val();
-            console.log(url + " \n" + userEmail + " \n" + csrf);
-            params = { email: userEmail, _csrf: csrf };
+            userId = $("#id").val();
+            console.log(url + " \n" + userEmail + " \n" + csrf + " \n" + userId);
+            params = { id: userId, email: userEmail, _csrf: csrf };
 
             $.post(url, params, function (response) {
                 if (response == "OK") {
@@ -175,7 +179,7 @@
                 } else {
                     showModalDialog("Error", "Unknown response from server ");
                 }
-            }).fail(function () { 
+            }).fail(function () {
                 showModalDialog("Error", "Could not connect to the server");
             });
 
