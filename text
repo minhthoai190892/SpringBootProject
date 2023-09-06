@@ -1,5 +1,5 @@
 
-git checkout -b 33.-Code-Update-User-Function
+git checkout -b 34.-Code-Delete-User-Function
 git add .
-git commit -m "33.-Code-Update-User-Function"
-git push -u origin 33.-Code-Update-User-Function
+git commit -m "34.-Code-Delete-User-Function"
+git push -u origin 34.-Code-Delete-User-Function

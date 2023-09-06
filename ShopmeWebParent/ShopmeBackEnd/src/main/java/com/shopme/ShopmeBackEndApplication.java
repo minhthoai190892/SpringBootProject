@@ -33,7 +33,16 @@ public class ShopmeBackEndApplication {
 //			deleteUserById(userRepository);
 //			testEncodePassword();
 //			testGetUserById(userRepository);
+//			testCountById(userRepository);
 		};
+	}
+	private void testCountById(UserRepository userRepository) {
+		// TODO Auto-generated method stub
+		System.err.println("testCountById");
+		Integer id =11;
+		Long countById = userRepository.countById(id);
+		System.out.println(countById);
+		
 	}
 	private void testGetUserById(UserRepository userRepository) {
 		// TODO Auto-generated method stub

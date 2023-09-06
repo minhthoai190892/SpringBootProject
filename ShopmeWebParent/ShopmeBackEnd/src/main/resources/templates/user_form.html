@@ -73,7 +73,7 @@
         </div>
         <form th:action="@{/users/save}" th:object="${user}" method="post" style="max-width: 700px;margin: 0 auto;"
             onsubmit="return checkEmailUnique(this)">
-            <input type="hidden" name="" th:field="*{id}">
+            <input type="hidden" name=""th:field="*{id}">
             <div class="border border-secondary rounded p-3">
                 <div class="form-group row">
                     <label for="" class="col-sm-4 col-form-label">E-mail:</label>
@@ -99,10 +99,10 @@
                 <div class="form-group row mt-2">
                     <label for="" class="col-sm-4 col-form-label">Password:</label>
                     <div class="col-sm-8">
-                        <input th:if="${user.id == null}" type="password" class="form-control" th:field="*{password}"
-                            required minlength="8" maxlength="20">
-                        <input th:if="${user.id != null}" type="password" class="form-control" th:field="*{password}"
-                            minlength="8" maxlength="20">
+                        <input th:if="${user.id == null}" type="password" class="form-control" th:field="*{password}" required minlength="8"
+                            maxlength="20">
+                            <input th:if="${user.id != null}" type="password" class="form-control" th:field="*{password}"  minlength="8"
+                            maxlength="20">
                     </div>
                 </div>
                 <div class="form-group row mt-2">
@@ -131,7 +131,7 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="modalTitle">Warning</h5>
+                        <h5 class="modal-title" id="modalTitle"></h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body" id="modalBody">
@@ -168,18 +168,18 @@
             userEmail = $("#email").val();
             csrf = $("input[name='_csrf']").val();
             userId = $("#id").val();
-            console.log(url + " \n" + userEmail + " \n" + csrf + " \n" + userId);
-            params = { id: userId, email: userEmail, _csrf: csrf };
+            console.log(url + " \n" + userEmail + " \n" + csrf+ " \n"+userId);
+            params = {id:userId, email: userEmail, _csrf: csrf };
 
             $.post(url, params, function (response) {
                 if (response == "OK") {
-                    form.submit();
+                     form.submit();
                 } else if (response == "Duplicated") {
                     showModalDialog("Warning", "There is another user having the email " + userEmail);
                 } else {
                     showModalDialog("Error", "Unknown response from server ");
                 }
-            }).fail(function () {
+            }).fail(function () { 
                 showModalDialog("Error", "Could not connect to the server");
             });
 
@@ -187,7 +187,7 @@
             return false;
         }
         function showModalDialog(title, message) {
-            $("#modalTile").text(title);
+            $("#modalTitle").text(title);
             $("#modalBody").text(message);
             $("#modalDialog").modal("show");
         }

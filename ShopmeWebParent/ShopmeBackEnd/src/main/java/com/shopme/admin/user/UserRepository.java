@@ -11,4 +11,5 @@ import com.shopme.common.entity.User;
 public interface UserRepository  extends JpaRepository<User, Integer>{
 	@Query("select u from User u where u.email=:email")
 	public User getUserByEmail(@Param("email")String email);
+	public long countById(Integer id) ;
 }
