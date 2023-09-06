@@ -7,6 +7,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import com.shopme.admin.user.RoleRepository;
 import com.shopme.admin.user.UserRepository;
@@ -29,8 +30,18 @@ public class ShopmeBackEndApplication {
 //			getUserById(userRepository);
 //			updateUserDetail(userRepository);
 //			updateUserRoles(userRepository,roleRepository);
-			deleteUserById(userRepository);
+//			deleteUserById(userRepository);
+//			testEncodePassword();
 		};
+	}
+	private void testEncodePassword() {
+		// TODO Auto-generated method stub
+		BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+		String rawPassword = "nam2020";
+		String encodePassword = bCryptPasswordEncoder.encode(rawPassword);
+		boolean matches = bCryptPasswordEncoder.matches(rawPassword, encodePassword);
+		System.out.println(encodePassword);
+		System.out.println(matches);
 	}
 	private void deleteUserById(UserRepository userRepository) {
 		// TODO Auto-generated method stub

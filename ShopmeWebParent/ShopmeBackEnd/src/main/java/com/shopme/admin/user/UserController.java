@@ -1,4 +1,4 @@
-package com.shopme.admin.user.controller;
+package com.shopme.admin.user;
 
 import java.util.List;
 
@@ -9,8 +9,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.shopme.admin.user.UserRepository;
-import com.shopme.admin.user.service.UserService;
 import com.shopme.common.entity.Role;
 import com.shopme.common.entity.User;
 
