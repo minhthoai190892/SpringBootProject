@@ -1,5 +1,5 @@
 
-git checkout -b 30.-Encode-User-Password
+git checkout -b 31.-Check-Uniqueness-of-User-Email
 git add .
-git commit -m "30.-Encode-User-Password"
-git push -u origin 30.-Encode-User-Password
+git commit -m "31.-Check-Uniqueness-of-User-Email"
+git push -u origin 31.-Check-Uniqueness-of-User-Email

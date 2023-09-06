@@ -32,7 +32,16 @@ public class ShopmeBackEndApplication {
 //			updateUserRoles(userRepository,roleRepository);
 //			deleteUserById(userRepository);
 //			testEncodePassword();
+//			testGetUserById(userRepository);
 		};
+	}
+	private void testGetUserById(UserRepository userRepository) {
+		// TODO Auto-generated method stub
+		System.err.println("testGetUserById");
+		String email = "minhthoai190892@gmail.com";
+		User user = userRepository.getUserByEmail(email);
+		System.out.println(user);
+		
 	}
 	private void testEncodePassword() {
 		// TODO Auto-generated method stub

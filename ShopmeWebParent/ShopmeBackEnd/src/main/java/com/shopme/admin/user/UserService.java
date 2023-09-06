@@ -34,7 +34,15 @@ public class UserService {
 		return roleRepository.findAll();
 	}
 	public User saveUser(User user) {
-		encodePassword(user);
+		encodePassword(user); 
 		return userRepository.save(user);
+	}
+	/**
+	 * Hàm kiểm tra email 
+	 * @return boolean
+	 * */
+	public boolean isEmailUnique(String email) {
+		User user = userRepository.getUserByEmail(email);
+		return user==null;
 	}
 }
