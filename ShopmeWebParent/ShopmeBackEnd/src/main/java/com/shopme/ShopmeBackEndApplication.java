@@ -39,7 +39,19 @@ public class ShopmeBackEndApplication {
 //			testCountById(userRepository);
 //			testDisableUser(userRepository);
 //			testListFirstPage(userRepository);
+//			testSearch(userRepository);
 		};
+	}
+	private void testSearch(UserRepository userRepository) {
+		System.err.println("testSearch");
+		// TODO Auto-generated method stub
+		String keyword = "bruce";
+		int pageNumber = 0;
+		int pageSize =4;
+		Pageable pageable = PageRequest.of(pageNumber, pageSize);
+		Page<User> page = userRepository.findAll(keyword,pageable);
+		List<User> users = page.getContent();
+		users.forEach(user->System.out.println(user));
 	}
 	private void testListFirstPage(UserRepository userRepository) {
 		// TODO Auto-generated method stub

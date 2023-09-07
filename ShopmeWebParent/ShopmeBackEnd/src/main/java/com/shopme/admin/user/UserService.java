@@ -113,10 +113,13 @@ public class UserService {
 	 * hàm phân trang và sort
 	 * @return trả về 1 danh sách 
 	 * */
-	public Page<User> listByPage(Integer pageNum,String sortField, String sortDir) {
+	public Page<User> listByPage(Integer pageNum,String sortField, String sortDir,String keyword) {
 		Sort sort = Sort.by(sortField);
 		sort = sortDir.equals("asc")?sort.ascending():sort.descending();
 		Pageable pageable = PageRequest.of(pageNum -1, USERS_PER_PAGE,sort);
+		if (keyword!=null) {
+			return userRepository.findAll(keyword, pageable);
+		}
 		return userRepository.findAll(pageable);
 	}
 }
