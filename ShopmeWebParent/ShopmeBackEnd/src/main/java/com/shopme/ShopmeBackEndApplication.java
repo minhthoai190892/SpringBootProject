@@ -34,7 +34,15 @@ public class ShopmeBackEndApplication {
 //			testEncodePassword();
 //			testGetUserById(userRepository);
 //			testCountById(userRepository);
+//			testDisableUser(userRepository);
 		};
+	}
+	private void testDisableUser(UserRepository userRepository) {
+		// TODO Auto-generated method stub
+		System.err.println("testDisableUser");
+		Integer id =9;
+		userRepository.updateEnabledStatus(id, false);
+		
 	}
 	private void testCountById(UserRepository userRepository) {
 		// TODO Auto-generated method stub
