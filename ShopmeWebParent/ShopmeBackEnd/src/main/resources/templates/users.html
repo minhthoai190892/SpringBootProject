@@ -100,7 +100,10 @@
                     <tbody class="table-group-divider">
                         <tr class="table-primary" th:each=" user: ${listUsers}">
                             <td scope="row">[[${user.id}]]</td>
-                            <td><i class="fa-solid fa-image-portrait fa-2xl icon-silver"></i></td>
+                            <td>
+                                <i th:if="${user.photo==null}" class="fa-solid fa-image-portrait fa-2xl icon-silver"></i>
+                                <img th:if="${user.photo!=null}" class="img-fluid" width="100" height="100" th:src="@{${user.photosImagePath}}" alt="">
+                            </td>
                             <td>[[${user.firstName}]]</td>
                             <td>[[${user.lastName}]]</td>
                             <td>[[${user.email}]]</td>
