@@ -4,6 +4,9 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +18,7 @@ import jakarta.transaction.Transactional;
 @Service
 @Transactional
 public class UserService {
+	public static final int USERS_PER_PAGE=4;
 	@Autowired
 	private UserRepository userRepository;
 	@Autowired
@@ -103,5 +107,13 @@ public class UserService {
 	}
 	public void updateUserEnabledStatus(Integer id, boolean enabled) {
 		userRepository.updateEnabledStatus(id, enabled);
+	}
+	/**
+	 * hàm phân trang
+	 * @return trả về 1 danh sách 
+	 * */
+	public Page<User> listByPage(Integer pageNum) {
+		Pageable pageable = PageRequest.of(pageNum -1, USERS_PER_PAGE);
+		return userRepository.findAll(pageable);
 	}
 }

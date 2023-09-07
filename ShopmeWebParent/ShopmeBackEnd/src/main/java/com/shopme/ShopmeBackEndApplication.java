@@ -7,6 +7,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.Bean;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import com.shopme.admin.user.RoleRepository;
@@ -35,7 +38,18 @@ public class ShopmeBackEndApplication {
 //			testGetUserById(userRepository);
 //			testCountById(userRepository);
 //			testDisableUser(userRepository);
+//			testListFirstPage(userRepository);
 		};
+	}
+	private void testListFirstPage(UserRepository userRepository) {
+		// TODO Auto-generated method stub
+		System.err.println("testListFirstPage");
+		int pageNumber = 1;
+		int pageSize =4;
+		Pageable pageable = PageRequest.of(pageNumber, pageSize);
+		Page<User> page = userRepository.findAll(pageable);
+		List<User> users = page.getContent();
+		users.forEach(user->System.out.println(user));
 	}
 	private void testDisableUser(UserRepository userRepository) {
 		// TODO Auto-generated method stub
