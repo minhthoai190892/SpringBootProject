@@ -1,5 +1,5 @@
 
-git checkout -b 41.-Code-Filter-Function-for-Users-List
+git checkout -b 42.-Code-Refactor-#1
 git add .
-git commit -m "41.-Code-Filter-Function-for-Users-List"
-git push -u origin 41.-Code-Filter-Function-for-Users-List
+git commit -m "42.-Code-Refactor-#1 tạo fragment "
+git push -u origin 42.-Code-Refactor-#1
