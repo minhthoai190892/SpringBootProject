@@ -17,8 +17,11 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.shopme.admin.FileUploadUtil;
+import com.shopme.admin.export.UserCsvExporter;
 import com.shopme.common.entity.Role;
 import com.shopme.common.entity.User;
+
+import jakarta.servlet.http.HttpServletResponse;
 
 @Controller
 public class UserController {
@@ -95,7 +98,10 @@ public class UserController {
 //		System.out.println(user.getRoles());
 		return getRedirectURLtoAffectedUser(user);
 	}
-
+	/**
+	 * Hàm hiển thị User sau khi cập nhật hoặc tạo mới
+	 * @return đường dẫn tới User
+	 * */
 	private String getRedirectURLtoAffectedUser(User user) {
 		String firstPartOfEmail = user.getEmail().split("@")[0];
 		return "redirect:/users/page/1?sortField=id&sortDir=asc&keyword="+firstPartOfEmail;
@@ -139,5 +145,11 @@ public class UserController {
 		String message = "The user ID " + id + " has been " + status;
 		redirectAttributes.addFlashAttribute("message", message);
 		return "redirect:/users";
+	}
+	@GetMapping("/users/export/csv")
+	public void exportToCSV(HttpServletResponse response) throws IOException {
+		List<User> listUsers = userService.listAll();
+		UserCsvExporter exporter = new UserCsvExporter();
+		exporter.export(listUsers, response);
 	}
 }

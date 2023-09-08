@@ -74,7 +74,8 @@
         </div>
         <div>
             <h1>Manager User</h1>
-            <a th:href="@{/users/new}" class="btn btn-primary mb-2">Create New User</a>
+            <a th:href="@{/users/new}" class="btn btn-primary mb-2">Create New User</a>&nbsp;|&nbsp;
+            <a th:href="@{/users/export/csv}" class="btn btn-primary mb-2">Export to csv</a>
         </div>
         <div class="alert alert-success text-center" th:if="${message!=null}">[[${message}]]</div>
         <div>

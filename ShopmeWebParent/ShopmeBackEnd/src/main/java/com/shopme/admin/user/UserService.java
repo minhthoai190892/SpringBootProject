@@ -33,7 +33,7 @@ public class UserService {
 	}
 
 	public List<User> listAll() {
-		return userRepository.findAll();
+		return userRepository.findAll(Sort.by("id").ascending());
 
 	}
 
