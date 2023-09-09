@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+
+
+<body>
+
+    <th th:fragment="colum_link(fieldName,columLabel,removeTag)" th:remove="${removeTag}">
+        <!--
+        <th>
+            <a th:if="${sortField !='firstName'}"
+                th:href="@{'/users/page/'+${currentPage}+'?sortField=firstName&sortDir='+${sortDir}+${keyword!=null?'&keyword='+keyword:''}}"
+                class="text-black">First Name <span th:if="${sortField=='firstName'}"
+                    th:class="${sortDir == 'asc'?'fa-solid fa-sort-up':'fa-solid fa-sort-down'}"></span>
+            </a>
+            <a th:if="${sortField =='firstName'}"
+                th:href="@{'/users/page/'+${currentPage}+'?sortField=firstName&sortDir='+${reverseSortDir}+${keyword!=null?'&keyword='+keyword:''}}"
+                class="text-black">First Name <span th:if="${sortField=='firstName'}"
+                    th:class="${sortDir == 'asc'?'fa-solid fa-sort-up':'fa-solid fa-sort-down'}"></span>
+            </a>
+        </th>
+        -->
+        <a th:href="@{'/users/page/'+${currentPage}+'?sortField='+${fieldName}+'&sortDir='+${sortField != fieldName?sortDir:reverseSortDir   } +${keyword!=null?'&keyword='+keyword:''}}"
+            class="text-black">[[${columLabel}]] <span th:if="${sortField==fieldName}"
+                th:class="${sortDir == 'asc'?'fa-solid fa-sort-up':'fa-solid fa-sort-down'}"></span>
+        </a>
+    </th>
+
+
+</body>
+
+</html>
