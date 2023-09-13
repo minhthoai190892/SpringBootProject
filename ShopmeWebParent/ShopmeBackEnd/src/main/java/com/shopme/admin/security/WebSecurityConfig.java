@@ -38,6 +38,12 @@ public class WebSecurityConfig {
 							.usernameParameter("email")
 							.permitAll()
 							)
+					
+					.logout(logout->logout.permitAll())
+					.rememberMe(me -> me//kích hoạt nhớ tài khoản
+	                        //tạo một key mặc định cho ứng dụng trong cookie
+	                        .key("bWluaHRob2FpJTQwZ21haWxxd2UuY29tOjE2ODc0OTQ0NzEwNTA6U0hBMjU2OjdiNTk5NTliOTU1MDUxOTgwOTJjMzFhYzMwMGIyNDc0MTA5ZjQ0YWE5YmJlZmE0ZWExZDIyZDRjOWYyMjlkMjA")
+	                        .tokenValiditySeconds(7 * 24 * 60 * 60))//thây đổi thời gian hết hạn của key 
 					;
 							
 
