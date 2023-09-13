@@ -13,7 +13,7 @@
             <a th:href="@{/users/export/excel}" class="fa-solid fa-file-excel fa-2xl  mb-2"></a>&nbsp;|&nbsp;
             <a th:href="@{/users/export/pdf}" class="fa-solid fa-file-pdf fa-2xl  mb-2"></a>
         </div>
-        <div class="alert alert-success text-center" th:if="${message!=null}">[[${message}]]</div>
+
         <div>
             <form th:action="@{/users/page/1}" class="form-inline m-3">
                 <input type="hidden" name="sortField" th:value="${sortField}">
@@ -28,6 +28,7 @@
                         class="btn btn-secondary"><i class="fa-solid fa-eraser"></i></button>
                 </div>
             </form>
+            <div class="alert alert-success text-center" th:if="${message!=null}">[[${message}]]</div>
         </div>
         <div class="full-details">
             <div class="table-responsive">
@@ -144,8 +145,9 @@
         </script>
     <script src="https://code.jquery.com/jquery-3.7.1.js"
         integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
-        <script th:src="@{/js/common.js}"></script>
+    <script th:src="@{/js/common.js}"></script>
     <script>
+        moduleUrl = "[[@{/users}]]"
         $(document).ready(function () {
             $(".link-delete").on("click", function (e) {
                 e.preventDefault();
