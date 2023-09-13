@@ -1,5 +1,5 @@
 
-git checkout -b 51.-Code-User-Authentication
+git checkout -b 52.-Show-Users-Full-Name-and-Logout-Link
 git add .
-git commit -m "51.-Code-User-Authentication"
-git push -u origin 51.-Code-User-Authentication
+git commit -m "52.-Show-Users-Full-Name-and-Logout-Link"
+git push -u origin 52.-Show-Users-Full-Name-and-Logout-Link
