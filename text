@@ -1,5 +1,5 @@
 
-git checkout -b 52.-Show-Users-Full-Name-and-Logout-Link
+git checkout -b 56.-Code-Update-Account-Details-part-2
 git add .
-git commit -m "52.-Show-Users-Full-Name-and-Logout-Link"
-git push -u origin 52.-Show-Users-Full-Name-and-Logout-Link
+git commit -m "56.-Code-Update-Account-Details-part-2"
+git push -u origin 56.-Code-Update-Account-Details-part-2

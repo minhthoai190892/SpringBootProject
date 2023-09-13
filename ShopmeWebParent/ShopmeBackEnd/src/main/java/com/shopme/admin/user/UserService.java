@@ -26,7 +26,9 @@ public class UserService {
 	private RoleRepository roleRepository;
 	@Autowired
 	private PasswordEncoder passwordEncoder;
-
+	public User getByEmail(String email) {
+		return userRepository.getUserByEmail(email);
+	}
 	private void encodePassword(User user) {
 		String encodePassword = passwordEncoder.encode(user.getPassword());
 		user.setPassword(encodePassword);
@@ -121,5 +123,19 @@ public class UserService {
 			return userRepository.findAll(keyword, pageable);
 		}
 		return userRepository.findAll(pageable);
+	}
+	public User updateAccount(User userInForm) {
+		User userDB = userRepository.findById(userInForm.getId()).get();
+		if (!userInForm.getPassword().isEmpty()) {
+			userDB.setPassword(userInForm.getPassword());
+			encodePassword(userDB);
+		}
+		if (userInForm.getPhoto()!=null) {
+			userDB.setPhoto(userInForm.getPhoto());
+			
+		}
+		userDB.setFirstName(userInForm.getFirstName());
+		userDB.setLastName(userInForm.getLastName());
+		return userRepository.save(userDB);
 	}
 }

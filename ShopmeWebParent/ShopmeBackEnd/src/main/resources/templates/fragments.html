@@ -1,6 +1,21 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 
+<head th:fragment="page_head(title)">
+    <meta charset="UTF-8" http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, minimum-scale=1.0" />
+    <title>[[${title}]]</title>
+    <!-- <link rel="stylesheet" th:href="@{/webjars/bootstrap/dist/css/bootstrap.min.css}">
+        <link rel="stylesheet" th:href="@{/webjars/bootstrap/dist/js/bootstrap.min.js}"> -->
+    <!-- Bootstrap CSS v5.2.1 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous" />
+
+    <!-- <link rel="stylesheet" th:href="@{/webjars/jquery/dist/jquery.min.js}"> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+        integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
 
 
 <body>
@@ -25,7 +40,9 @@
                 th:class="${sortDir == 'asc'?'fa-solid fa-sort-up':'fa-solid fa-sort-down'}"></span>
         </a>
     </th>
-
+    <div th:fragment="footer" class="text-center">
+        <p>Shopme Control Panel - Copyright &copy; Shopme</p>
+    </div>
 
 </body>
 
