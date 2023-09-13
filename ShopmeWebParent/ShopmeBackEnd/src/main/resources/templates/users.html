@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 
-    <head th:replace="fragments::page_head('User Manager')"></head>
+<head th:replace="fragments::page_head('User Manager')"></head>
 
 <body>
     <div class="container-fluid">
@@ -90,33 +90,7 @@
         </div>
 
 
-        <div class="less-details">
-            <div th:each=" user: ${listUsers}" class="row m-1">
-                <div class="col-4">
-                    <i th:if="${user.photo==null}" class="fa-solid fa-image-portrait fa-2xl icon-silver"></i>
-                    <img th:if="${user.photo!=null}" class="img-fluid" width="100" height="100"
-                        th:src="@{${user.photosImagePath}}" alt="">
-                </div>
-                <div class="col-8">
-                    <div>[[${user.fullName}]]</div>
-                    <div>[[${user.roles}]]</div>
-                    <div class="mt-2">
-                        <a th:if="${ user.enabled == true}" class="fa-solid fa-circle-check fa-2xl icon-green"
-                            th:href="@{'/users/'+${user.id}+'/enabled/false'}" title="disabled this user"></a>
-                        <a th:if="${ user.enabled == false}" class="fa-solid fa-circle fa-2xl icon-dark"
-                            th:href="@{'/users/'+${user.id}+'/enabled/true'}" title="enabled this user"></a>
 
-                        <a th:href="@{'/users/edit/'+${user.id}}" title="Edit this user"
-                            class="fa-regular fa-pen-to-square fa-2xl icon-green"></a>|<a
-                            th:href="@{'/users/delete/'+${user.id}}" title="Delete this user" th:userId="${user.id}"
-                            th:userFullName="${user.firstName + ' '+user.lastName}"
-                            class="fa-regular fa-trash-can fa-2xl icon-dark link-delete"></a>
-                    </div>
-                </div>
-                <div>&nbsp;</div>
-            </div>
-
-        </div>
         <div th:if="${totalItems>1}">
             <nav aria-label="Page navigation example ">
                 <ul class="pagination justify-content-center flex-wrap">
@@ -157,6 +131,7 @@
                 </div>
             </div>
         </div>
+
         <head th:replace="fragments::footer"></head>
     </div>
     <!-- Bootstrap JavaScript Libraries -->
@@ -169,6 +144,7 @@
         </script>
     <script src="https://code.jquery.com/jquery-3.7.1.js"
         integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+        <script th:src="@{/js/common.js}"></script>
     <script>
         $(document).ready(function () {
             $(".link-delete").on("click", function (e) {

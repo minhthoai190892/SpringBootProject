@@ -1,5 +1,5 @@
 
-git checkout -b 56.-Code-Update-Account-Details-part-2
+git checkout -b 60. Code User Authorization Basics
 git add .
-git commit -m "56.-Code-Update-Account-Details-part-2"
-git push -u origin 56.-Code-Update-Account-Details-part-2
+git commit -m "60. Code User Authorization Basics"
+git push -u origin 60. Code User Authorization Basics

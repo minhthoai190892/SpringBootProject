@@ -30,6 +30,7 @@ public class WebSecurityConfig {
 					authorizeHttpRequests(config->config
 							.requestMatchers("/css/**").permitAll()
 							.requestMatchers("/images/**").permitAll()
+							.requestMatchers("/users/**").hasAuthority("Admin")
 							.anyRequest().authenticated()
 							
 							)
