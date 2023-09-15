@@ -31,6 +31,7 @@ public class WebSecurityConfig {
 							.requestMatchers("/css/**").permitAll()
 							.requestMatchers("/images/**").permitAll()
 							.requestMatchers("/users/**").hasAuthority("Admin")
+							.requestMatchers("/categories/**").hasAnyAuthority("Admin","Editor")
 							.anyRequest().authenticated()
 							
 							)

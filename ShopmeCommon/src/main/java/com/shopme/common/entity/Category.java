@@ -30,11 +30,50 @@ public class Category {
 	@JoinColumn(name = "parent_id")
 	private Category parent;
 	@OneToMany(mappedBy = "parent" )
-	
 	private Set<Category> children= new HashSet<>();
+	
 	public Integer getId() {
 		return id;
 	}
+	
+	
+	public Category(Integer id) {
+		super();
+		this.id = id;
+	}
+
+
+	public Category() {
+		super();
+	}
+
+
+	public Category(String name) {
+		super();
+		this.name = name;
+		this.alias=name;
+		this.image="default.png";
+	}
+	
+	public Category(String name,Category parent) {
+		this(name);
+		System.err.println("Category");
+		System.out.println(name);
+		this.parent = parent;
+	}
+
+
+	public Category(String name, String alias, String image, boolean enabled, Category parent, Set<Category> children) {
+		super();
+		this.name = name;
+		this.alias = alias;
+		this.image = image;
+		this.enabled = enabled;
+		this.parent = parent;
+		this.children = children;
+	}
+
+
 	public void setId(Integer id) {
 		this.id = id;
 	}
@@ -74,6 +113,20 @@ public class Category {
 	public void setChildren(Set<Category> children) {
 		this.children = children;
 	}
+
+
+	@Override
+	public String toString() {
+		return "Category [id=" + id + ", name=" + name + ", alias=" + alias + ", image=" + image + ", enabled="
+				+ enabled + ", parent=" + parent + ", children=" + children + "]";
+	}
+
+
+//	@Override
+//	public String toString() {
+//		return "Category [id=" + id + ", name=" + name + ", alias=" + alias + ", image=" + image + ", enabled="
+//				+ enabled + "]";
+//	}
 	
 	
 }

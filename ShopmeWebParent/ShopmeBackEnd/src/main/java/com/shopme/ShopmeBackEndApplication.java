@@ -12,8 +12,10 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import com.shopme.admin.category.CategoryRepository;
 import com.shopme.admin.user.RoleRepository;
 import com.shopme.admin.user.UserRepository;
+import com.shopme.common.entity.Category;
 import com.shopme.common.entity.Role;
 import com.shopme.common.entity.User;
 
@@ -25,7 +27,7 @@ public class ShopmeBackEndApplication {
 		SpringApplication.run(ShopmeBackEndApplication.class, args);
 	}
 	@Bean
-	public CommandLineRunner commandLineRunner(RoleRepository roleRepository,UserRepository userRepository) {
+	public CommandLineRunner commandLineRunner(RoleRepository roleRepository,UserRepository userRepository,CategoryRepository categoryRepository) {
 		return runner ->{
 //			createRole(repository);
 //			createUserWithTwoRole(repository,userRepository);
@@ -40,7 +42,43 @@ public class ShopmeBackEndApplication {
 //			testDisableUser(userRepository);
 //			testListFirstPage(userRepository);
 //			testSearch(userRepository);
+//			testCreateRootCategory(categoryRepository);
+//			testCreateSubCategory(categoryRepository);
+//			testListCategory(categoryRepository);
 		};
+	}
+	private void testListCategory(CategoryRepository categoryRepository) {
+		// TODO Auto-generated method stub
+		System.err.println("testListCategory");
+		Category category = categoryRepository.findById(7).get();
+		System.out.println(category);
+		
+	}
+	private void testCreateSubCategory(CategoryRepository categoryRepository) {
+		// TODO Auto-generated method stub
+		System.err.println("testCreateSubCategory");
+//		lấy Category làm parent
+		Category parent = new Category(8);
+//		thêm sub category và parent
+		Category laptops = new Category("Desktop Asus 2", parent);
+//		Category Component = new Category("Computer Component", parent);
+//		lưu sub category
+		Category saveCategory = categoryRepository.save(laptops);
+		System.out.println(saveCategory);
+//		categoryRepository.saveAll(List.of(Laptops,Component));
+//		
+//		List<Category> categories = categoryRepository.findAll();
+//		for (Category category : categories) {
+//			System.out.println(category);
+//		}
+	}
+	private void testCreateRootCategory(CategoryRepository categoryRepository) {
+		// TODO Auto-generated method stub
+		System.err.println("testCreateRootCategory");
+		Category category = new Category("Electronics");
+		Category saveCategory = categoryRepository.save(category);
+		System.out.println(saveCategory);
+		
 	}
 	private void testSearch(UserRepository userRepository) {
 		System.err.println("testSearch");
