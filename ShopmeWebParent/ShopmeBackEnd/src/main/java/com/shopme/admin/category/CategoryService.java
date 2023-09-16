@@ -26,18 +26,19 @@ public class CategoryService {
 	 * hàm hiển thị danh sách category cho trang html
 	 * */
 	public List<Category> listCategoriesUsedInForm() {
+		System.err.println("CategoryService>listCategoriesUsedInForm");
 		List<Category> categoriesUsedInForm = new ArrayList<>();
 		Iterable<Category> categoriesInDB = categoryRepository.findAll();
 		for (Category category : categoriesInDB) {
 			if (category.getParent()==null) {
-				categoriesUsedInForm.add(new Category(category.getName()));
+				categoriesUsedInForm.add(Category.copyIdAndName(category));
 				System.out.println(category.getName());
 //				lấy tập hợp con của parent
 				Set<Category> children = category.getChildren();
 				for (Category subCategory : children) {
 					System.out.println("--"+subCategory.getName());
 					String name = "--"+subCategory.getName();
-					categoriesUsedInForm.add(new Category(name));
+					categoriesUsedInForm.add(Category.copyIdAndName(subCategory.getId(), name));
 					
 					listChildrent(categoriesUsedInForm,subCategory,1);
 				}
@@ -61,9 +62,12 @@ public class CategoryService {
 			}
 			System.out.println(subCategory.getName());
 			name+=subCategory.getName();
-			categoriesUsedInForm.add(new Category(name));
+			categoriesUsedInForm.add(Category.copyIdAndName(subCategory.getId(), name));
 			listChildrent(categoriesUsedInForm,subCategory, newSubLevel);
 		}
 		
+	}
+	public Category saveCategory(Category category) {
+		return categoryRepository.save(category);
 	}
 }

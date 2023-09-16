@@ -20,15 +20,17 @@ import com.shopme.common.entity.Role;
 import com.shopme.common.entity.User;
 
 @SpringBootApplication
-@EntityScan({"com.shopme.common.entity","com.shopme.admin.user"})
+@EntityScan({ "com.shopme.common.entity", "com.shopme.admin.user" })
 public class ShopmeBackEndApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(ShopmeBackEndApplication.class, args);
 	}
+
 	@Bean
-	public CommandLineRunner commandLineRunner(RoleRepository roleRepository,UserRepository userRepository,CategoryRepository categoryRepository) {
-		return runner ->{
+	public CommandLineRunner commandLineRunner(RoleRepository roleRepository, UserRepository userRepository,
+			CategoryRepository categoryRepository) {
+		return runner -> {
 //			createRole(repository);
 //			createUserWithTwoRole(repository,userRepository);
 //			listUser(userRepository);
@@ -47,83 +49,82 @@ public class ShopmeBackEndApplication {
 //			testListCategory(categoryRepository);
 		};
 	}
+
 	private void testListCategory(CategoryRepository categoryRepository) {
 		// TODO Auto-generated method stub
 		System.err.println("testListCategory");
 		Category category = categoryRepository.findById(7).get();
 		System.out.println(category);
-		
+
 	}
+
 	private void testCreateSubCategory(CategoryRepository categoryRepository) {
 		// TODO Auto-generated method stub
 		System.err.println("testCreateSubCategory");
-//		lấy Category làm parent
-		Category parent = new Category(8);
-//		thêm sub category và parent
-		Category laptops = new Category("Desktop Asus 2", parent);
-//		Category Component = new Category("Computer Component", parent);
-//		lưu sub category
-		Category saveCategory = categoryRepository.save(laptops);
-		System.out.println(saveCategory);
-//		categoryRepository.saveAll(List.of(Laptops,Component));
-//		
-//		List<Category> categories = categoryRepository.findAll();
-//		for (Category category : categories) {
-//			System.out.println(category);
-//		}
+		Category parent = new Category(1);
+		Category subCategory = new Category("Lapđtopss", parent);
+		categoryRepository.save(subCategory);
+
 	}
+
 	private void testCreateRootCategory(CategoryRepository categoryRepository) {
 		// TODO Auto-generated method stub
 		System.err.println("testCreateRootCategory");
-		Category category = new Category("Electronics");
+		Category category = new Category("Computers");
 		Category saveCategory = categoryRepository.save(category);
 		System.out.println(saveCategory);
-		
+
 	}
+
 	private void testSearch(UserRepository userRepository) {
 		System.err.println("testSearch");
 		// TODO Auto-generated method stub
 		String keyword = "bruce";
 		int pageNumber = 0;
-		int pageSize =4;
+		int pageSize = 4;
 		Pageable pageable = PageRequest.of(pageNumber, pageSize);
-		Page<User> page = userRepository.findAll(keyword,pageable);
+		Page<User> page = userRepository.findAll(keyword, pageable);
 		List<User> users = page.getContent();
-		users.forEach(user->System.out.println(user));
+		users.forEach(user -> System.out.println(user));
 	}
+
 	private void testListFirstPage(UserRepository userRepository) {
 		// TODO Auto-generated method stub
 		System.err.println("testListFirstPage");
 		int pageNumber = 1;
-		int pageSize =4;
+		int pageSize = 4;
 		Pageable pageable = PageRequest.of(pageNumber, pageSize);
 		Page<User> page = userRepository.findAll(pageable);
 		List<User> users = page.getContent();
-		users.forEach(user->System.out.println(user));
+		users.forEach(user -> System.out.println(user));
 	}
+
 	private void testDisableUser(UserRepository userRepository) {
 		// TODO Auto-generated method stub
 		System.err.println("testDisableUser");
-		Integer id =9;
+		Integer id = 9;
 		userRepository.updateEnabledStatus(id, false);
-		
+
 	}
+
 	private void testCountById(UserRepository userRepository) {
 		// TODO Auto-generated method stub
 		System.err.println("testCountById");
-		Integer id =11;
+		Integer id = 11;
 		Long countById = userRepository.countById(id);
 		System.out.println(countById);
-		
+
 	}
+
 	private void testGetUserById(UserRepository userRepository) {
 		// TODO Auto-generated method stub
 		System.err.println("testGetUserById");
 		String email = "minhthoai190892@gmail.com";
 		User user = userRepository.getUserByEmail(email);
 		System.out.println(user);
-		
+
 	}
+
 	private void testEncodePassword() {
 		// TODO Auto-generated method stub
 		BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
@@ -133,11 +134,13 @@ public class ShopmeBackEndApplication {
 		System.out.println(encodePassword);
 		System.out.println(matches);
 	}
+
 	private void deleteUserById(UserRepository userRepository) {
 		// TODO Auto-generated method stub
 		System.err.println("deleteUserById");
 		userRepository.deleteById(3);
 	}
+
 	private void updateUserRoles(UserRepository userRepository, RoleRepository roleRepository) {
 		// TODO Auto-generated method stub
 		System.err.println("updateUserRoles");
@@ -147,8 +150,9 @@ public class ShopmeBackEndApplication {
 		user.getRoles().remove(roleEditor);
 		user.addRole(salespersonRole);
 		userRepository.save(user);
-		
+
 	}
+
 	private void updateUserDetail(UserRepository userRepository) {
 		// TODO Auto-generated method stub
 		System.err.println("updateUserDetail");
@@ -157,21 +161,23 @@ public class ShopmeBackEndApplication {
 		user.setEmail("namjavaprogrammer@gmail.com");
 		userRepository.save(user);
 	}
+
 	private void getUserById(UserRepository userRepository) {
 		// TODO Auto-generated method stub
 		System.err.println("getUserById");
 		User user = userRepository.findById(1).get();
 		System.out.println(user);
-		
-		
+
 	}
+
 	private void listUser(UserRepository userRepository) {
 		System.err.println("listUser");
 		Iterable<User> listUsers = userRepository.findAll();
-		listUsers.forEach(user->System.out.println(user));
+		listUsers.forEach(user -> System.out.println(user));
 		// TODO Auto-generated method stub
-		
+
 	}
+
 	private void createUserWithTwoRole(RoleRepository roleRepository, UserRepository userRepository) {
 		// TODO Auto-generated method stub
 		System.err.println("createUserWithTwoRole");
@@ -182,8 +188,9 @@ public class ShopmeBackEndApplication {
 		user.addRole(assistantRole);
 		userRepository.save(user);
 	}
-	private void createUser(RoleRepository roleRepository,UserRepository userRepository) {
-		
+
+	private void createUser(RoleRepository roleRepository, UserRepository userRepository) {
+
 		// TODO Auto-generated method stub
 		System.err.println("createUser");
 		Role editorRole = roleRepository.findById(3).get();
@@ -193,12 +200,14 @@ public class ShopmeBackEndApplication {
 		user.addRole(assistantRole);
 		userRepository.save(user);
 	}
+
 	private void createRole(RoleRepository repository) {
 		// TODO Auto-generated method stub
-		Role roleSalesperson = new Role("Salesperson","manage product price, customers, shipping, orders and sales report");
-		Role roleEdit = new Role("Editor","manage categories, brands, products,articles and menus");
-		Role roleShipper = new Role("Shipper","view products, view orders and update order status");
-		Role roleAssistant = new Role("Assistant","manage questions and reviews");
-		repository.saveAll(List.of(roleSalesperson,roleEdit,roleShipper,roleAssistant));
+		Role roleSalesperson = new Role("Salesperson",
+				"manage product price, customers, shipping, orders and sales report");
+		Role roleEdit = new Role("Editor", "manage categories, brands, products,articles and menus");
+		Role roleShipper = new Role("Shipper", "view products, view orders and update order status");
+		Role roleAssistant = new Role("Assistant", "manage questions and reviews");
+		repository.saveAll(List.of(roleSalesperson, roleEdit, roleShipper, roleAssistant));
 	}
 }
