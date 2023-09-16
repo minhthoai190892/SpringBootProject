@@ -37,7 +37,7 @@ public class AccountController {
 		String test = getEmailOfAuthenticatedCustomer(request);
 		System.out.println("test: " + test);
 		model.addAttribute("user", user);
-		return "account_form";
+		return "users/account_form";
 
 	}
 

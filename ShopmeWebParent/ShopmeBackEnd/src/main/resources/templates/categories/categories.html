@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments::page_head('category Manager')"></head>
+
+<body>
+    <div class="container-fluid">
+        <div th:replace="navigation::menu"></div>
+        <div>
+            <h1>Manager category</h1>
+            <a th:href="@{/categories/new}" class="fa-solid fa-folder-plus fa-2xl mb-2"></a>&nbsp;|&nbsp;
+            <a th:href="@{/categories/export/csv}" class="fa-solid fa-file-csv fa-2xl mb-2"></a>&nbsp;|&nbsp;
+            <a th:href="@{/categories/export/excel}" class="fa-solid fa-file-excel fa-2xl  mb-2"></a>&nbsp;|&nbsp;
+            <a th:href="@{/categories/export/pdf}" class="fa-solid fa-file-pdf fa-2xl  mb-2"></a>
+        </div>
+
+        <div>
+            <form th:action="@{/categories/page/1}" class="form-inline m-3">
+                <input type="hidden" name="sortField" th:value="${sortField}">
+                <input type="hidden" name="sortDir" th:value="${sortDir}">
+                <div style="display: flex;justify-items: center;">
+                    <p> Filter:&nbsp;</p>
+                    <input type="search" name="keyword" th:value="${keyword}" class="form-control" style="width: 500px;"
+                        id="" required>
+                    &nbsp;&nbsp; <button type="submit" value="Search" class="btn btn-primary"><i
+                            class="fa-solid fa-magnifying-glass"></i></button>
+                    &nbsp;&nbsp; <button type="button" value="Clear" onclick="clearFilter()"
+                        class="btn btn-secondary"><i class="fa-solid fa-eraser"></i></button>
+                </div>
+            </form>
+            <div class="alert alert-success text-center" th:if="${message!=null}">[[${message}]]</div>
+        </div>
+        <div class="full-details">
+            <div class="table-responsive">
+                <table class="table table-striped
+                table-hover
+                table-borderless
+                table-primary
+                align-middle">
+                    <thead class="table-light">
+                        <caption th:if="${totalItems>0}" class="text-center m-1">Showing categories # [[${startCount}]]
+                            to
+                            [[${endCount}]] of [[${totalItems}]]</caption>
+                        <caption th:unless="${totalItems>0}" class="text-center m-1">No categories found</caption>
+                        <tr>
+                            <th>ID</th>
+                            <th>Category Image</th>
+                            <th>Category Name</th>
+                            <th>Alias</th>
+                            <th>Enabled</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody class="table-group-divider">
+                        <tr class="table-primary" th:each=" category: ${listCategories}">
+                            <td>[[${category.id}]]</td>
+                            <td>
+                                <img th:src="@{${category.imagePath}}" class="img-fluid" width="100px" height="100px" alt="Image preview">
+                            </td>
+                            <td>[[${category.name}]]</td>
+                            <td>[[${category.alias}]]</td>
+                            <td>
+                                <a th:if="${ category.enabled == true}" class="fa-solid fa-circle-check fa-2xl icon-green"
+                                    th:href="@{'/categorys/'+${category.id}+'/enabled/false'}" title="disabled this category"></a>
+                                <a th:if="${ category.enabled == false}" class="fa-solid fa-circle fa-2xl icon-dark"
+                                    th:href="@{'/categorys/'+${category.id}+'/enabled/true'}" title="enabled this category"></a>
+                            </td>
+                            <td><a th:href="@{'/categorys/edit/'+${category.id}}" title="Edit this category"
+                                    class="fa-regular fa-pen-to-square fa-2xl icon-green"></a>|<a
+                                    th:href="@{'/categorys/delete/'+${category.id}}" title="Delete this category"
+                                    th:categoryId="${category.id}"
+                                    class="fa-regular fa-trash-can fa-2xl icon-dark link-delete"></a></td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+
+                    </tfoot>
+                </table>
+            </div>
+
+        </div>
+
+
+
+        <div th:if="${totalItems>1}">
+            <nav aria-label="Page navigation example ">
+                <ul class="pagination justify-content-center flex-wrap">
+                    <li th:class="${currentPage > 1 ?'page-item':'page-item disabled'} "><a class="page-link"
+                            th:href="@{'/categories/page/1?sortField='+${sortField}+'&sortDir='+${sortDir}+${keyword!=null?'&keyword='+keyword:''}}">First</a>
+                    </li>
+                    <li th:class="${currentPage > 1 ?'page-item':'page-item disabled'} "><a class="page-link"
+                            th:href="@{'/categories/page/'+${currentPage -1}+'?sortField='+${sortField}+'&sortDir='+${sortDir}+${keyword!=null?'&keyword='+keyword:''}}">Previous</a>
+                    </li>
+                    <li th:class="${currentPage !=i ? 'page-item':'page-item active'}"
+                        th:each=" i: ${#numbers.sequence(1,totalPages)}">
+                        <a class="page-link"
+                            th:href="@{'/categories/page/'+${i}+'?sortField='+${sortField}+'&sortDir='+${sortDir}+${keyword!=null?'&keyword='+keyword:''}}">[[${i}]]</a>
+                    </li>
+                    <li th:class="${currentPage < totalPages ?'page-item':'page-item disabled'} "><a class="page-link"
+                            th:href="@{'/categories/page/'+${currentPage +1}+'?sortField='+${sortField}+'&sortDir='+${sortDir}+${keyword!=null?'&keyword='+keyword:''}}">Next</a>
+                    </li>
+                    <li th:class="${currentPage < totalPages ?'page-item':'page-item disabled'} "><a class="page-link"
+                            th:href="@{'/categories/page/'+${totalPages}+'?sortField='+${sortField}+'&sortDir='+${sortDir}+${keyword!=null?'&keyword='+keyword:''}}">Last</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+        <div class="modal" id="confirmModal" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modalTitle"></h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p id="confirmText">Are you sure you want to delete this category ID</p>
+                    </div>
+                    <div class="modal-footer">
+                        <a class="btn btn-success" href="" id="yesButton">Yes</a>
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">No</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <head th:replace="fragments::footer"></head>
+    </div>
+    <!-- Bootstrap JavaScript Libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+        integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous">
+        </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js"
+        integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz" crossorigin="anonymous">
+        </script>
+    <script src="https://code.jquery.com/jquery-3.7.1.js"
+        integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+    <script th:src="@{/js/common.js}"></script>
+    <script>
+        moduleUrl = "[[@{/categories}]]"
+        $(document).ready(function () {
+            $(".link-delete").on("click", function (e) {
+                e.preventDefault();
+                link = $(this);
+                categoryId = link.attr("categoryId");
+                categoryFullName = link.attr("categoryFullName");
+                $("#yesButton").attr("href", link.attr("href"));
+                console.log(link.attr("href"));
+                $("#confirmText").text("Are you sure you want to delete this category ID: " + categoryId + " - " + categoryFullName)
+                $("#modalTitle").text("Delete Confirmation");
+                $("#confirmModal").modal("show");
+            });
+        });
+        function clearFilter() {
+            window.location = "[[@{/categories}]]"
+        }
+    </script>
+</body>
+
+</html>
