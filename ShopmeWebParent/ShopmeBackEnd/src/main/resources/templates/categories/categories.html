@@ -54,7 +54,9 @@
                     <tbody class="table-group-divider">
                         <tr class="table-primary" th:each=" category: ${listCategories}">
                             <td>[[${category.id}]]</td>
-                            <td>[[${category.image}]]</td>
+                            <td>
+                                <img th:src="@{${category.imagePath}}" class="img-fluid" width="100px" height="100px" alt="Image preview">
+                            </td>
                             <td>[[${category.name}]]</td>
                             <td>[[${category.alias}]]</td>
                             <td>

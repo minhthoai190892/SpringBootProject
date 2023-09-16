@@ -47,7 +47,15 @@ public class ShopmeBackEndApplication {
 //			testCreateRootCategory(categoryRepository);
 //			testCreateSubCategory(categoryRepository);
 //			testListCategory(categoryRepository);
+			testListRootCategory(categoryRepository);
 		};
+	}
+
+	private void testListRootCategory(CategoryRepository categoryRepository) {
+		// TODO Auto-generated method stub
+		System.err.println("testListCategory");
+		List<Category>listRootCategory = categoryRepository.listRootCategory();
+		listRootCategory.forEach(cat->System.out.println(cat.getName()));
 	}
 
 	private void testListCategory(CategoryRepository categoryRepository) {

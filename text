@@ -1,6 +1,6 @@
 
 
-git checkout -b 71.-Code-Create-Category-Function
+git checkout -b 72.-List-Categories-in-Hierarchical-Form
 git add .
-git commit -m "71.-Code-Create-Category-Function"
-git push -u origin 71.-Code-Create-Category-Function
+git commit -m "72.-List-Categories-in-Hierarchical-Form"
+git push -u origin 72.-List-Categories-in-Hierarchical-Form
